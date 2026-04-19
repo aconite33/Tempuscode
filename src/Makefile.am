@@ -27,6 +27,7 @@ ETAGSFLAGS = --regex='/^ASPELL(\\([a-zA-Z0-9_]+\\))$/\\1/' --regex='/^ACMD(\\([a
                  classes/act.psionic.c \
                  classes/act.ranger.c \
                  classes/act.thief.c \
+                 classes/act.warlock.c \
                  classes/char_class.c \
                  combat/act.offensive.c \
                  combat/combat_messages.c \

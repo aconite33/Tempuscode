@@ -168,6 +168,10 @@ show_char_class_menu(struct descriptor_data *d, bool remort)
         left_col = tmp_strcat(left_col,
                               "&gBard&n\r\n    Roguish Performer\r\n", NULL);
     }
+    if (valid_class_race(ch, CLASS_WARLOCK, remort)) {
+        left_col = tmp_strcat(left_col,
+                              "&rWarlock&n\r\n    Pact-Bound Cursebringer\r\n", NULL);
+    }
 
     // Print future classes
     if (valid_class_race(ch, CLASS_CYBORG, remort)) {

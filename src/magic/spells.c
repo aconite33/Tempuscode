@@ -3405,6 +3405,19 @@ ASPELL(spell_dispel_magic)
                 if (SPELL_IS_MAGIC(aff->type) || SPELL_IS_DIVINE(aff->type) ||
                     SPELL_IS_BARD(aff->type)) {
                     if (aff->level < number(level / 2, level * 2)) {
+                        /* Soul Rot bites back on dispel. */
+                        if (aff->type == SPELL_SOUL_ROT) {
+                            act("$n's pact lashes out at you as the soul rot unravels!",
+                                false, victim, NULL, ch, TO_VICT);
+                            act("The pact binding the soul rot lashes out at $N!",
+                                false, victim, NULL, ch, TO_NOTVICT);
+                            damage(victim, ch, NULL, dice(5, 10),
+                                   SPELL_SOUL_ROT, -1);
+                            if (is_dead(ch)) {
+                                affect_remove(victim, aff);
+                                return;
+                            }
+                        }
                         affect_remove(victim, aff);
                     }
                 }
@@ -3877,4 +3890,200 @@ ASPELL(spell_call_predator)
     if (perform_call_familiar(ch, level, TYPE_PREDATOR)) {
         gain_skill_prof(ch, SPELL_CALL_PREDATOR);
     }
+}
+
+/* ============================================================
+ *  WARLOCK MANUAL SPELLS
+ * ============================================================ */
+
+/*
+ * Warlock pact drift: the Abyss does not lend full power to wavering
+ * souls. Neutral Warlocks do 50% damage, good Warlocks do 25%.
+ */
+int
+warlock_align_scale(struct creature *ch, int dam)
+{
+    if (IS_WARLOCK(ch) && !IS_EVIL(ch)) {
+        if (IS_GOOD(ch)) {
+            return dam / 4;
+        }
+        return dam / 2;
+    }
+    return dam;
+}
+
+ASPELL(spell_drain_life)
+{
+    int dam;
+
+    if (!victim) {
+        return;
+    }
+    dam = dice(level / 2, 6) + level;
+    dam = warlock_align_scale(ch, dam);
+    if (damage(ch, victim, NULL, dam, SPELL_DRAIN_LIFE, -1)) {
+        return;  /* victim died */
+    }
+    GET_HIT(ch) = MIN(GET_MAX_HIT(ch), GET_HIT(ch) + dam / 2);
+    act("You feel reinvigorated as $N's life-force drains into you.",
+        false, ch, NULL, victim, TO_CHAR);
+    gain_skill_prof(ch, SPELL_DRAIN_LIFE);
+}
+
+ASPELL(spell_vampiric_touch)
+{
+    int dam;
+
+    if (!victim) {
+        return;
+    }
+    dam = dice(level, 8);
+    dam = warlock_align_scale(ch, dam);
+    if (damage(ch, victim, NULL, dam, SPELL_VAMPIRIC_TOUCH, -1)) {
+        return;  /* victim died */
+    }
+    GET_HIT(ch) = MIN(GET_MAX_HIT(ch), GET_HIT(ch) + dam);
+    act("You drain $N's very essence into your own flesh!",
+        false, ch, NULL, victim, TO_CHAR);
+    gain_skill_prof(ch, SPELL_VAMPIRIC_TOUCH);
+}
+
+ASPELL(spell_siphon_soul)
+{
+    int dam;
+    struct affected_type af;
+
+    if (!victim) {
+        return;
+    }
+    dam = dice(level, 7) + level;
+    dam = warlock_align_scale(ch, dam);
+    if (damage(ch, victim, NULL, dam, SPELL_SIPHON_SOUL, -1)) {
+        return;  /* victim died */
+    }
+    GET_HIT(ch) = MIN(GET_MAX_HIT(ch), GET_HIT(ch) + dam / 2);
+    GET_MANA(ch) = MIN(GET_MAX_MANA(ch), GET_MANA(ch) + dam / 3);
+
+    if (!affected_by_spell(victim, SPELL_SIPHON_SOUL)) {
+        init_affect(&af);
+        af.type = SPELL_SIPHON_SOUL;
+        af.duration = 1 + level / 5;
+        af.bitvector = AFF3_MANA_TAP;
+        af.aff_index = 3;
+        af.level = level;
+        af.owner = GET_IDNUM(ch);
+        affect_to_char(victim, &af);
+    }
+    act("You siphon the raw essence of $N's soul!",
+        false, ch, NULL, victim, TO_CHAR);
+    gain_skill_prof(ch, SPELL_SIPHON_SOUL);
+}
+
+/* Pact minion summon helper.  Placeholder vnums reuse the existing
+ * legion_vnums[] devil pool until dedicated Dretch / Barlgura / Vrock /
+ * Glabrezu / Balor mobs are built in sample_lib/world/. */
+static void
+perform_summon_pact(struct creature *ch, int level, int spellnum,
+                    int vnum_idx_min, int vnum_idx_max,
+                    const char *demon_name)
+{
+    int count;
+    float mult;
+    struct creature *demon = NULL;
+    struct affected_type af;
+    int idx;
+
+    if (number(0, 120) > CHECK_SKILL(ch, spellnum)) {
+        send_to_char(ch, "You fail to complete the pact.\r\n");
+        return;
+    }
+
+    mult = skill_bonus(ch, spellnum) * 1.5 / 100;
+
+    idx = vnum_idx_min + number(0, vnum_idx_max - vnum_idx_min);
+    idx = MIN(MAX(idx, 0), 4);
+    if (!(demon = read_mobile(legion_vnums[idx]))) {
+        errlog("unable to load pact minion vnum=%d.", legion_vnums[idx]);
+        send_to_char(ch, "Your pact falters. The Abyss does not answer.\r\n");
+        return;
+    }
+
+    gain_skill_prof(ch, spellnum);
+
+    GET_HITROLL(demon) = (int8_t) MIN(GET_HITROLL(demon) * mult, 60);
+    GET_DAMROLL(demon) = (int8_t) MIN(GET_DAMROLL(demon) * mult, 60);
+    GET_MAX_HIT(demon) = (int16_t) MIN(GET_MAX_HIT(demon) * mult, 30000);
+    GET_HIT(demon) = GET_MAX_HIT(demon);
+
+    SET_BIT(NPC_FLAGS(demon), NPC_PET);
+    GET_GOLD(demon) = 0;
+
+    char_to_room(demon, ch->in_room, false);
+    act(tmp_sprintf(
+            "A rift of pact-born flame opens with a shriek!\r\n"
+            "$n emerges from the Abyss at your call, a %s bound to your will!",
+            demon_name),
+        false, demon, NULL, NULL, TO_ROOM);
+
+    if (number(0, 50 + GET_LEVEL(demon)) > skill_bonus(ch, spellnum)
+        || !can_charm_more(ch)) {
+        act("$N's eyes blaze with hatred. Your pact has slipped!",
+            false, ch, NULL, demon, TO_CHAR);
+        act("$N turns on $n, pact slipping!", false, ch, NULL, demon, TO_ROOM);
+        start_hunting(demon, ch);
+        remember(demon, ch);
+        return;
+    }
+
+    count = 0;
+    for (struct follow_type *k = ch->followers; k; k = k->next) {
+        if (IS_NPC(k->follower) && IS_PET(k->follower)) {
+            count++;
+        }
+    }
+    if (count > number(1, MAX(1, GET_REMORT_GEN(ch) + 1))) {
+        return;
+    }
+
+    REMOVE_BIT(NPC_FLAGS(demon), NPC_HELPER);
+    REMOVE_BIT(NPC_FLAGS(demon), NPC_AGGRESSIVE);
+    REMOVE_BIT(NPC_FLAGS(demon), NPC_SCAVENGER);
+    REMOVE_BIT(NPC2_FLAGS(demon), NPC2_LOOTER);
+    REMOVE_BIT(NPC_FLAGS(demon), NPC_STAY_ZONE);
+    REMOVE_BIT(NPC2_FLAGS(demon), NPC2_STAY_SECT);
+
+    add_follower(demon, ch);
+
+    init_affect(&af);
+    af.type = SPELL_CHARM;
+    af.duration = MAX(1, level * 10 / MAX(1, (GET_INT(demon) - GET_REMORT_GEN(ch))));
+    af.bitvector = AFF_CHARM;
+    af.level = level;
+    af.owner = GET_IDNUM(ch);
+    affect_to_char(demon, &af);
+}
+
+ASPELL(spell_summon_dretch)
+{
+    perform_summon_pact(ch, level, SPELL_SUMMON_DRETCH, 0, 0, "Dretch");
+}
+
+ASPELL(spell_summon_barlgura)
+{
+    perform_summon_pact(ch, level, SPELL_SUMMON_BARLGURA, 1, 1, "Barlgura");
+}
+
+ASPELL(spell_summon_vrock)
+{
+    perform_summon_pact(ch, level, SPELL_SUMMON_VROCK, 2, 2, "Vrock");
+}
+
+ASPELL(spell_summon_glabrezu)
+{
+    perform_summon_pact(ch, level, SPELL_SUMMON_GLABREZU, 3, 3, "Glabrezu");
+}
+
+ASPELL(spell_summon_balor)
+{
+    perform_summon_pact(ch, level, SPELL_SUMMON_BALOR, 4, 4, "Balor");
 }

@@ -274,6 +274,7 @@ Asylum saves us all!</lyrics>
   </skill>
   <spell id="143" name="banishment">
     <granted class="cleric" level="29" gen="4"/>
+    <granted class="warlock" level="40" gen="2"/>
     <cost mana_initial="100" mana_level_dec="5" mana_minimum="50"/>
     <position minimum="fighting"/>
     <target type="self" scope="never"/>
@@ -358,6 +359,7 @@ Asylum saves us all!</lyrics>
   <spell id="4" name="blindness">
     <granted class="mage" level="16"/>
     <granted class="cleric" level="13"/>
+    <granted class="warlock" level="16"/>
     <cost mana_initial="35" mana_level_dec="1" mana_minimum="25"/>
     <position minimum="standing"/>
     <target type="self" scope="never"/>
@@ -555,6 +557,7 @@ Repel the frigid cold of night!</lyrics>
   </spell>
   <spell id="7" name="charm person">
     <granted class="mage" level="22"/>
+    <granted class="warlock" level="25"/>
     <cost mana_initial="75" mana_level_dec="2" mana_minimum="50"/>
     <position minimum="fighting"/>
     <target type="self" scope="never"/>
@@ -581,6 +584,7 @@ Repel the frigid cold of night!</lyrics>
   </spell>
   <spell id="8" name="chill touch">
     <granted class="mage" level="5"/>
+    <granted class="warlock" level="4"/>
     <cost mana_initial="30" mana_level_dec="3" mana_minimum="10"/>
     <position minimum="fighting"/>
     <target type="creature" scope="room"/>
@@ -830,6 +834,7 @@ To answer the mysteries one's life can bring.</lyrics>
   </spell>
   <spell id="17" name="curse">
     <granted class="mage" level="19"/>
+    <granted class="warlock" level="19"/>
     <cost mana_initial="80" mana_level_dec="2" mana_minimum="50"/>
     <position minimum="standing"/>
     <target type="creature" scope="room"/>
@@ -1169,6 +1174,7 @@ So I'll provide a merry tune to give our step some pep!</lyrics>
   </skill>
   <spell id="38" name="drowsy">
     <granted class="mage" level="10"/>
+    <granted class="warlock" level="15"/>
     <cost mana_initial="40" mana_level_dec="5" mana_minimum="25"/>
     <position minimum="standing"/>
     <target type="creature" scope="room"/>
@@ -1314,6 +1320,7 @@ So I'll provide a merry tune to give our step some pep!</lyrics>
   </skill>
   <spell id="25" name="energy drain">
     <granted class="mage" level="24"/>
+    <granted class="warlock" level="46"/>
     <cost mana_initial="40" mana_level_dec="1" mana_minimum="25"/>
     <position minimum="fighting"/>
     <target type="creature" scope="room"/>
@@ -2514,6 +2521,7 @@ The melody removes my trace.</lyrics>
   </skill>
   <spell id="33" name="poison">
     <granted class="mage" level="20"/>
+    <granted class="warlock" level="12"/>
     <cost mana_initial="50" mana_level_dec="3" mana_minimum="20"/>
     <position minimum="standing"/>
     <target type="self" scope="never"/>
@@ -3204,6 +3212,7 @@ His presence is revealed to me.</lyrics>
   </spell>
   <spell id="68" name="slow">
     <granted class="mage" level="38"/>
+    <granted class="warlock" level="34"/>
     <cost mana_initial="120" mana_level_dec="6" mana_minimum="60"/>
     <position minimum="fighting"/>
     <target type="creature" scope="room"/>
@@ -3636,6 +3645,7 @@ His presence is revealed to me.</lyrics>
     <granted class="mage" level="41"/>
     <granted class="cleric" level="18"/>
     <granted class="knight" level="18"/>
+    <granted class="warlock" level="11"/>
     <cost mana_initial="60" mana_level_dec="3" mana_minimum="10"/>
     <position minimum="standing"/>
     <target type="self" scope="only"/>
@@ -3709,6 +3719,7 @@ Unmake your magic, break this spell</lyrics>
   </skill>
   <spell id="142" name="vampiric regeneration">
     <granted class="cleric" level="37" gen="4"/>
+    <granted class="warlock" level="34" gen="2"/>
     <cost mana_initial="100" mana_level_dec="5" mana_minimum="50"/>
     <position minimum="fighting"/>
     <target type="self" scope="never"/>
@@ -3907,6 +3918,7 @@ And to our packs a lightness bring!</lyrics>
   </spell>
   <spell id="63" name="word stun">
     <granted class="mage" level="37"/>
+    <granted class="warlock" level="44"/>
     <cost mana_initial="100" mana_level_dec="5" mana_minimum="50"/>
     <position minimum="standing"/>
     <target type="self" scope="never"/>
@@ -4071,5 +4083,289 @@ But blocks true love and harbors sin.</lyrics>
   </spell>
   <spell id="827" name="egun lightning">
     <flag value="weapon"/>
+  </spell>
+
+  <!-- ============== Warlock Class ================ -->
+  <skill id="700" name="eldritch blast">
+    <granted class="warlock" level="1"/>
+  </skill>
+  <spell id="162" name="hex">
+    <granted class="warlock" level="3"/>
+    <cost mana_initial="25" mana_level_dec="1" mana_minimum="12"/>
+    <position minimum="standing"/>
+    <target type="creature" scope="room"/>
+    <target type="creature" scope="fighting"/>
+    <flag value="violent"/>
+    <flag value="affects"/>
+    <flag value="magic"/>
+    <flag value="unpleasant"/>
+    <affectmessage>A binding hex settles upon you, sapping your vitality.</affectmessage>
+    <potion color1="black"/>
+  </spell>
+  <spell id="163" name="corruption">
+    <granted class="warlock" level="6"/>
+    <cost mana_initial="35" mana_level_dec="2" mana_minimum="15"/>
+    <position minimum="fighting"/>
+    <target type="creature" scope="room"/>
+    <target type="creature" scope="fighting"/>
+    <flag value="violent"/>
+    <flag value="affects"/>
+    <flag value="magic"/>
+    <flag value="evil"/>
+    <affectmessage>Dark corruption festers in your flesh.</affectmessage>
+    <potion color1="sickly green"/>
+  </spell>
+  <spell id="164" name="ray of enfeeblement">
+    <granted class="warlock" level="7"/>
+    <cost mana_initial="30" mana_level_dec="1" mana_minimum="18"/>
+    <position minimum="standing"/>
+    <target type="creature" scope="room"/>
+    <target type="creature" scope="fighting"/>
+    <flag value="violent"/>
+    <flag value="affects"/>
+    <flag value="magic"/>
+    <affectmessage>Your strength drains away under the ray of enfeeblement.</affectmessage>
+    <potion color1="sickly yellow"/>
+  </spell>
+  <spell id="165" name="shadow bolt">
+    <granted class="warlock" level="9"/>
+    <cost mana_initial="30" mana_level_dec="1" mana_minimum="15"/>
+    <position minimum="fighting"/>
+    <target type="creature" scope="room"/>
+    <target type="creature" scope="fighting"/>
+    <flag value="violent"/>
+    <flag value="damage"/>
+    <flag value="magic"/>
+    <flag value="evil"/>
+    <potion color1="black"/>
+  </spell>
+  <spell id="166" name="bane">
+    <granted class="warlock" level="14"/>
+    <cost mana_initial="50" mana_level_dec="2" mana_minimum="25"/>
+    <position minimum="standing"/>
+    <target type="creature" scope="room"/>
+    <target type="creature" scope="fighting"/>
+    <flag value="violent"/>
+    <flag value="affects"/>
+    <flag value="magic"/>
+    <flag value="unpleasant"/>
+    <affectmessage>A pact-forged bane weakens your every action.</affectmessage>
+    <potion color1="dusky red"/>
+  </spell>
+  <spell id="167" name="drain life">
+    <granted class="warlock" level="18"/>
+    <cost mana_initial="50" mana_level_dec="2" mana_minimum="25"/>
+    <position minimum="fighting"/>
+    <target type="creature" scope="room"/>
+    <target type="creature" scope="fighting"/>
+    <flag value="violent"/>
+    <flag value="damage"/>
+    <flag value="manual"/>
+    <flag value="magic"/>
+    <flag value="evil"/>
+    <potion color1="crimson"/>
+  </spell>
+  <spell id="168" name="bestow curse">
+    <granted class="warlock" level="22"/>
+    <cost mana_initial="70" mana_level_dec="2" mana_minimum="35"/>
+    <position minimum="standing"/>
+    <target type="creature" scope="room"/>
+    <target type="creature" scope="fighting"/>
+    <flag value="violent"/>
+    <flag value="affects"/>
+    <flag value="magic"/>
+    <flag value="unpleasant"/>
+    <flag value="evil"/>
+    <affectmessage>A grievous curse is bestowed upon you.</affectmessage>
+    <potion color1="midnight"/>
+  </spell>
+  <spell id="169" name="vampiric touch">
+    <granted class="warlock" level="25"/>
+    <cost mana_initial="60" mana_level_dec="2" mana_minimum="30"/>
+    <position minimum="fighting"/>
+    <target type="creature" scope="fighting"/>
+    <flag value="violent"/>
+    <flag value="damage"/>
+    <flag value="manual"/>
+    <flag value="touch"/>
+    <flag value="magic"/>
+    <flag value="evil"/>
+    <potion color1="dark crimson"/>
+  </spell>
+  <spell id="170" name="hellish rebuke">
+    <granted class="warlock" level="27"/>
+    <cost mana_initial="55" mana_level_dec="2" mana_minimum="25"/>
+    <position minimum="fighting"/>
+    <target type="creature" scope="fighting"/>
+    <flag value="violent"/>
+    <flag value="damage"/>
+    <flag value="magic"/>
+    <flag value="evil"/>
+    <potion color1="hellish red"/>
+  </spell>
+  <spell id="171" name="darkness">
+    <granted class="warlock" level="28"/>
+    <cost mana_initial="60" mana_level_dec="1" mana_minimum="30"/>
+    <position minimum="standing"/>
+    <target type="self" scope="only"/>
+    <flag value="affects"/>
+    <flag value="magic"/>
+    <flag value="evil"/>
+    <affectmessage>A shroud of unnatural darkness surrounds you.</affectmessage>
+    <potion color1="inky black"/>
+  </spell>
+  <spell id="172" name="fear hex">
+    <granted class="warlock" level="36"/>
+    <cost mana_initial="80" mana_level_dec="2" mana_minimum="45"/>
+    <position minimum="standing"/>
+    <target type="creature" scope="room"/>
+    <target type="creature" scope="fighting"/>
+    <flag value="violent"/>
+    <flag value="affects"/>
+    <flag value="magic"/>
+    <flag value="unpleasant"/>
+    <flag value="evil"/>
+    <affectmessage>A paralyzing fear hex grips your mind.</affectmessage>
+    <potion color1="pale violet"/>
+  </spell>
+  <spell id="173" name="agony">
+    <granted class="warlock" level="39"/>
+    <cost mana_initial="90" mana_level_dec="3" mana_minimum="50"/>
+    <position minimum="fighting"/>
+    <target type="creature" scope="room"/>
+    <target type="creature" scope="fighting"/>
+    <flag value="violent"/>
+    <flag value="affects"/>
+    <flag value="magic"/>
+    <flag value="evil"/>
+    <affectmessage>A symbol of agony burns itself upon your flesh.</affectmessage>
+    <potion color1="burning red"/>
+  </spell>
+  <spell id="174" name="soul rot">
+    <granted class="warlock" level="43"/>
+    <cost mana_initial="110" mana_level_dec="3" mana_minimum="60"/>
+    <position minimum="fighting"/>
+    <target type="creature" scope="room"/>
+    <target type="creature" scope="fighting"/>
+    <flag value="violent"/>
+    <flag value="affects"/>
+    <flag value="magic"/>
+    <flag value="evil"/>
+    <affectmessage>Your soul begins to rot from within.</affectmessage>
+    <potion color1="putrid brown"/>
+  </spell>
+  <spell id="175" name="circle of death">
+    <granted class="warlock" level="49"/>
+    <cost mana_initial="160" mana_level_dec="3" mana_minimum="100"/>
+    <position minimum="fighting"/>
+    <target type="creature" scope="room"/>
+    <target type="creature" scope="fighting"/>
+    <flag value="violent"/>
+    <flag value="damage"/>
+    <flag value="areas"/>
+    <flag value="magic"/>
+    <flag value="evil"/>
+    <potion color1="coal black"/>
+  </spell>
+  <spell id="176" name="summon dretch">
+    <granted class="warlock" level="12"/>
+    <cost mana_initial="80" mana_level_dec="2" mana_minimum="40"/>
+    <position minimum="standing"/>
+    <target type="self" scope="only"/>
+    <flag value="manual"/>
+    <flag value="summons"/>
+    <flag value="magic"/>
+    <flag value="evil"/>
+  </spell>
+  <spell id="177" name="summon barlgura">
+    <granted class="warlock" level="20"/>
+    <cost mana_initial="120" mana_level_dec="3" mana_minimum="60"/>
+    <position minimum="standing"/>
+    <target type="self" scope="only"/>
+    <flag value="manual"/>
+    <flag value="summons"/>
+    <flag value="magic"/>
+    <flag value="evil"/>
+  </spell>
+  <spell id="178" name="summon vrock">
+    <granted class="warlock" level="30"/>
+    <cost mana_initial="160" mana_level_dec="3" mana_minimum="90"/>
+    <position minimum="standing"/>
+    <target type="self" scope="only"/>
+    <flag value="manual"/>
+    <flag value="summons"/>
+    <flag value="magic"/>
+    <flag value="evil"/>
+  </spell>
+  <spell id="276" name="siphon soul">
+    <granted class="warlock" level="18" gen="1"/>
+    <cost mana_initial="75" mana_level_dec="2" mana_minimum="40"/>
+    <position minimum="fighting"/>
+    <target type="creature" scope="room"/>
+    <target type="creature" scope="fighting"/>
+    <flag value="violent"/>
+    <flag value="damage"/>
+    <flag value="manual"/>
+    <flag value="magic"/>
+    <flag value="evil"/>
+    <potion color1="abyssal"/>
+  </spell>
+  <spell id="277" name="enervation">
+    <granted class="warlock" level="30" gen="3"/>
+    <cost mana_initial="100" mana_level_dec="3" mana_minimum="60"/>
+    <position minimum="fighting"/>
+    <target type="creature" scope="room"/>
+    <target type="creature" scope="fighting"/>
+    <flag value="violent"/>
+    <flag value="affects"/>
+    <flag value="magic"/>
+    <flag value="evil"/>
+    <affectmessage>Your life-force leaks away under the enervation.</affectmessage>
+    <potion color1="void black"/>
+  </spell>
+  <spell id="278" name="finger of death">
+    <granted class="warlock" level="42" gen="3"/>
+    <cost mana_initial="140" mana_level_dec="3" mana_minimum="80"/>
+    <position minimum="fighting"/>
+    <target type="creature" scope="room"/>
+    <target type="creature" scope="fighting"/>
+    <flag value="violent"/>
+    <flag value="damage"/>
+    <flag value="magic"/>
+    <flag value="evil"/>
+    <potion color1="bone white"/>
+  </spell>
+  <spell id="279" name="summon glabrezu">
+    <granted class="warlock" level="28" gen="2"/>
+    <cost mana_initial="180" mana_level_dec="4" mana_minimum="100"/>
+    <position minimum="standing"/>
+    <target type="self" scope="only"/>
+    <flag value="manual"/>
+    <flag value="summons"/>
+    <flag value="magic"/>
+    <flag value="evil"/>
+  </spell>
+  <spell id="280" name="negative energy flood">
+    <granted class="warlock" level="48" gen="5"/>
+    <cost mana_initial="250" mana_level_dec="5" mana_minimum="150"/>
+    <position minimum="fighting"/>
+    <target type="creature" scope="room"/>
+    <target type="creature" scope="fighting"/>
+    <flag value="violent"/>
+    <flag value="damage"/>
+    <flag value="areas"/>
+    <flag value="magic"/>
+    <flag value="evil"/>
+    <potion color1="abyss black"/>
+  </spell>
+  <spell id="281" name="summon balor">
+    <granted class="warlock" level="42" gen="4"/>
+    <cost mana_initial="220" mana_level_dec="5" mana_minimum="130"/>
+    <position minimum="standing"/>
+    <target type="self" scope="only"/>
+    <flag value="manual"/>
+    <flag value="summons"/>
+    <flag value="magic"/>
+    <flag value="evil"/>
   </spell>
 </spells>

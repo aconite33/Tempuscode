@@ -877,6 +877,31 @@ mag_damage(int level, struct creature *ch, struct creature *victim,
         dam = dice(level / 2, 4);
         break;
 
+    /* ============== Warlock direct-damage spells ============== */
+    case SPELL_SHADOW_BOLT:
+        dam = dice(level, 6) + level;
+        break;
+    case SPELL_HELLISH_REBUKE:
+        dam = dice(level, 5) + level * 2;
+        if (!CHAR_WITHSTANDS_FIRE(victim)) {
+            ignite_creature(victim, ch);
+        }
+        break;
+    case SPELL_CIRCLE_OF_DEATH:
+        dam = dice(level / 2, 10) + level;
+        break;
+    case SPELL_FINGER_OF_DEATH:
+        dam = dice(level, 8) + level * 2;
+        if (GET_HIT(victim) - dam < (int)GET_LEVEL(ch) &&
+            !mag_savingthrow(victim, level, savetype)) {
+            dam = GET_HIT(victim) + 10;  /* instakill */
+        }
+        break;
+    case SPELL_NEGATIVE_ENERGY_FLOOD:
+        dam = dice(level, 8) + level * 3;
+        break;
+    /* ============================================================ */
+
     }                           /* switch(spellnum) */
 
     if (spellnum < MAX_SPELLS && CHECK_SKILL(ch, spellnum) >= 50) {
@@ -916,6 +941,18 @@ mag_damage(int level, struct creature *ch, struct creature *victim,
             if (IS_GOOD(victim)) {
                 dam += dam * abs(GET_ALIGNMENT(victim)) / 4000;
             }
+        }
+    }
+
+    /*
+     * Warlock pact drift: the Abyss does not lend full power to wavering
+     * souls. Neutral Warlocks cast at 50% damage, good Warlocks at 25%.
+     */
+    if (IS_WARLOCK(ch) && !IS_EVIL(ch)) {
+        if (IS_GOOD(ch)) {
+            dam = dam / 4;
+        } else {
+            dam = dam / 2;
         }
     }
 
@@ -1000,6 +1037,11 @@ mag_damage(int level, struct creature *ch, struct creature *victim,
                 true, victim, NULL, NULL, TO_CHAR);
             act("The flames on $n's body sizzle out and die.",
                 true, victim, NULL, NULL, TO_ROOM);
+        }
+    } else if (spellnum == SPELL_NEGATIVE_ENERGY_FLOOD) {
+        /* Apply Corruption DoT to survivors of the flood. */
+        if (!affected_by_spell(victim, SPELL_CORRUPTION)) {
+            mag_affects(level, ch, victim, NULL, SPELL_CORRUPTION, savetype);
         }
     }
 
@@ -2742,6 +2784,116 @@ mag_affects(int level,
         to_room = "Mirror images of $n begin moving around $m.";
         break;
 
+    /* ============== Warlock spells ============== */
+    case SPELL_HEX:
+        aff[0].location = APPLY_HITROLL;
+        aff[0].duration = 1 + (level / 3);
+        aff[0].modifier = -(1 + level / 10);
+        aff[0].bitvector = AFF_CURSE;
+        aff[1].location = APPLY_CHA;
+        aff[1].duration = aff[0].duration;
+        aff[1].modifier = -1;
+        aff[1].bitvector = AFF_CURSE;
+        accum_duration = true;
+        to_vict = "A binding hex settles upon you.";
+        to_room = "A binding hex settles upon $n.";
+        break;
+    case SPELL_CORRUPTION:
+        aff[0].location = APPLY_CON;
+        aff[0].duration = 3 + (level / 3);
+        aff[0].modifier = -1 - (level / 20);
+        accum_duration = false;
+        to_vict = "Dark corruption seeps into your flesh.";
+        to_room = "Dark corruption seeps into $n's flesh.";
+        break;
+    case SPELL_RAY_OF_ENFEEBLEMENT:
+        aff[0].location = APPLY_STR;
+        aff[0].duration = 1 + (level / 4);
+        aff[0].modifier = -(2 + level / 10);
+        aff[1].location = APPLY_DAMROLL;
+        aff[1].duration = aff[0].duration;
+        aff[1].modifier = -(1 + level / 12);
+        accum_duration = false;
+        to_vict = "A ray of enfeeblement saps your strength.";
+        to_room = "A ray of enfeeblement saps $n's strength.";
+        break;
+    case SPELL_BANE:
+        aff[0].location = APPLY_SAVING_SPELL;
+        aff[0].duration = 1 + (level / 3);
+        aff[0].modifier = 2;
+        aff[1].location = APPLY_HITROLL;
+        aff[1].duration = aff[0].duration;
+        aff[1].modifier = -(level / 8);
+        accum_duration = false;
+        to_vict = "A pact-forged bane weakens your every action.";
+        to_room = "A pact-forged bane weakens $n's every action.";
+        break;
+    case SPELL_BESTOW_CURSE:
+        aff[0].location = APPLY_HITROLL;
+        aff[0].duration = 2 + (level / 2);
+        aff[0].modifier = -(2 + level / 6);
+        aff[0].bitvector = AFF_CURSE;
+        aff[1].location = APPLY_DAMROLL;
+        aff[1].duration = aff[0].duration;
+        aff[1].modifier = -(2 + level / 8);
+        aff[1].bitvector = AFF_CURSE;
+        aff[2].location = APPLY_AC;
+        aff[2].duration = aff[0].duration;
+        aff[2].modifier = level / 5;
+        aff[2].bitvector = AFF_CURSE;
+        accum_duration = false;
+        to_vict = "A grievous curse is bestowed upon you.";
+        to_room = "A grievous curse is bestowed upon $n.";
+        break;
+    case SPELL_DARKNESS:
+        aff[0].duration = 3 + (level / 8);
+        aff[0].bitvector = AFF_BLUR;
+        accum_duration = true;
+        to_vict = "A shroud of unnatural darkness surrounds you.";
+        to_room = "A shroud of unnatural darkness surrounds $n.";
+        break;
+    case SPELL_FEAR_HEX:
+        aff[0].duration = 1 + (level / 4);
+        aff[0].bitvector = AFF_CONFUSION;
+        accum_duration = false;
+        to_vict = "A paralyzing fear hex grips your mind!";
+        to_room = "$n's eyes widen in paralyzing fear!";
+        break;
+    case SPELL_AGONY:
+        if (HAS_SYMBOL(victim)) {
+            send_to_char(ch, "Your agony fails. Another symbol already burns.\r\n");
+            return;
+        }
+        aff[0].location = APPLY_DEX;
+        aff[0].duration = level / 4;
+        aff[0].modifier = -(level / 8);
+        aff[0].bitvector = AFF3_SYMBOL_OF_PAIN;
+        aff[0].aff_index = 3;
+        accum_duration = false;
+        to_vict = "A symbol of agony burns itself upon your flesh!";
+        to_room = "A symbol of agony burns itself upon $n's flesh!";
+        break;
+    case SPELL_SOUL_ROT:
+        aff[0].location = APPLY_CON;
+        aff[0].duration = 2 + (level / 4);
+        aff[0].modifier = -(2 + level / 12);
+        accum_duration = false;
+        to_vict = "Your soul begins to rot from within!";
+        to_room = "$n's soul begins to rot from within!";
+        break;
+    case SPELL_ENERVATION:
+        aff[0].location = APPLY_HIT;
+        aff[0].duration = 1 + (level / 4);
+        aff[0].modifier = -(level * 2);
+        aff[1].duration = aff[0].duration;
+        aff[1].bitvector = AFF3_MANA_LEAK;
+        aff[1].aff_index = 3;
+        accum_duration = false;
+        to_vict = "Your life-force leaks away under the enervation!";
+        to_room = "$n's life-force leaks away under the enervation!";
+        break;
+    /* =============================================== */
+
     default:
         errlog("unknown spell %d in mag_affects.", spellnum);
         break;
@@ -3072,6 +3224,17 @@ mag_areas(int8_t level, struct creature *ch, int spellnum, int savetype)
         to_room =
             "$n's voice begins to suck in the life force of $s surroundings!";
         to_next_room = "You feel a chill deep in your soul.";
+        break;
+    case SPELL_CIRCLE_OF_DEATH:
+        to_char = "You unleash a sphere of death that engulfs all around you!";
+        to_room = "$n unleashes a sphere of death that engulfs the room!";
+        to_next_room = "A chill of death seeps through from nearby.";
+        break;
+    case SPELL_NEGATIVE_ENERGY_FLOOD:
+        to_char = "A flood of negative energy bursts outward from your pact!";
+        to_room = "A flood of negative energy bursts outward from $n's pact!";
+        to_next_room = "A wave of cold, soul-searing dread passes over you.";
+        break;
     }
 
     if (to_char != NULL) {

@@ -97,7 +97,8 @@ LEARNED(struct creature *ch)
                         i == CLASS_BARB || \
                         i == CLASS_THIEF || \
                         i == CLASS_MONK || \
-                        i == CLASS_BARD)
+                        i == CLASS_BARD || \
+                        i == CLASS_WARLOCK)
 
 #define FUTURE_CLASS(i) (i == CLASS_MERCENARY || \
                          i == CLASS_PSIONIC || \

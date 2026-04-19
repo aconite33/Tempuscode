@@ -744,6 +744,11 @@ dispatch_input(struct descriptor_data *d, char *arg)
             GET_ALIGNMENT(d->creature) = 0;
             set_desc_state(CXN_STATISTICS_ROLL, d);
             break;
+        } else if (IS_WARLOCK(d->creature)) {
+            GET_ALIGNMENT(d->creature) = -666;
+            d->creature->char_specials.saved.alignment = -666;
+            set_desc_state(CXN_STATISTICS_ROLL, d);
+            break;
         }
 
         if (is_abbrev(arg, "evil")) {
@@ -1287,6 +1292,8 @@ build_prompt(struct descriptor_data *d)
             return "The Drow race is inherently evil.  Thus you begin your life as evil.\r\n\r\nPress return to continue.\r\n";
         } else if (IS_MONK(d->creature)) {
             return "The monastic ideology requires that you remain neutral in alignment.\r\nTherefore you begin your life with a perfect neutrality.\r\n\r\nPress return to continue.\r\n";
+        } else if (IS_WARLOCK(d->creature)) {
+            return "A Warlock's pact is bound in malice.  You begin your life as evil.\r\n\r\nPress return to continue.\r\n";
         } else if (IS_KNIGHT(d->creature) || IS_CLERIC(d->creature)) {
             return "Do you wish to be good or evil? ";
         } else {

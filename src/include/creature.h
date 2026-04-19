@@ -52,7 +52,7 @@ enum char_class {
     CLASS_MONK = 11,
     CLASS_VAMPIRE = 12,
     CLASS_MERCENARY = 13,
-    CLASS_SPARE1 = 14,
+    CLASS_WARLOCK = 14,
     CLASS_SPARE2 = 15,
     CLASS_SPARE3 = 16,
 

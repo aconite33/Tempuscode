@@ -711,6 +711,33 @@ call_magic(struct creature *caster, struct creature *cvict,
             MANUAL_SPELL(song_hymn_of_peace);
             break;
 
+        /* ============ Warlock manual spells ============ */
+        case SPELL_DRAIN_LIFE:
+            MANUAL_SPELL(spell_drain_life);
+            break;
+        case SPELL_VAMPIRIC_TOUCH:
+            MANUAL_SPELL(spell_vampiric_touch);
+            break;
+        case SPELL_SIPHON_SOUL:
+            MANUAL_SPELL(spell_siphon_soul);
+            break;
+        case SPELL_SUMMON_DRETCH:
+            MANUAL_SPELL(spell_summon_dretch);
+            break;
+        case SPELL_SUMMON_BARLGURA:
+            MANUAL_SPELL(spell_summon_barlgura);
+            break;
+        case SPELL_SUMMON_VROCK:
+            MANUAL_SPELL(spell_summon_vrock);
+            break;
+        case SPELL_SUMMON_GLABREZU:
+            MANUAL_SPELL(spell_summon_glabrezu);
+            break;
+        case SPELL_SUMMON_BALOR:
+            MANUAL_SPELL(spell_summon_balor);
+            break;
+        /* ================================================ */
+
         }
     }
 

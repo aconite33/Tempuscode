@@ -379,7 +379,7 @@ long skill_cost(struct creature *ch, int skill);
 #define IS_BARD(ch)               IS_CLASS(ch, CLASS_BARD)
 #define IS_MONK(ch)               IS_CLASS(ch, CLASS_MONK)
 #define IS_MERC(ch)               IS_CLASS(ch, CLASS_MERCENARY)
-#define IS_SPARE1(ch)             IS_CLASS(ch, CLASS_SPARE1)
+#define IS_WARLOCK(ch)            IS_CLASS(ch, CLASS_WARLOCK)
 #define IS_SPARE2(ch)             IS_CLASS(ch, CLASS_SPARE2)
 #define IS_SPARE3(ch)             IS_CLASS(ch, CLASS_SPARE3)
 #define IS_SKELETON(ch)           IS_CLASS(ch, CLASS_SKELETON)

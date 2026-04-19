@@ -408,6 +408,7 @@ ACMD(do_wear);
 ACMD(do_weather);
 ACMD(do_weigh);
 ACMD(do_where);
+ACMD(do_eldritch_blast);
 ACMD(do_whirlwind);
 ACMD(do_whisper);
 ACMD(do_who);
@@ -722,10 +723,12 @@ struct command_info cmd_info[] = {
     {"dynedit", POS_DEAD, do_dynedit, LVL_IMMORT, 0, 0, 0},
 
     {"eat", POS_RESTING, do_eat, 0, SCMD_EAT, 0, 0},
+    {"eblast", POS_STANDING, do_eldritch_blast, 0, 0, 0, 0},
     {"echo", POS_SLEEPING, do_echo, LVL_IMMORT, SCMD_ECHO, 0, 0},
     {"econvert", POS_RESTING, do_econvert, 0, 0, 0, 0},
     {"ekiss", POS_RESTING, do_action, 0, 0, 0, 0},
     {"elbow", POS_FIGHTING, do_offensive_skill, 0, SKILL_ELBOW, 0, 0},
+    {"eldritch", POS_STANDING, do_eldritch_blast, 0, 0, 0, 0},
     {"elude", POS_STANDING, do_elude, 0, 0, 0, 0},
     {"emote", POS_RESTING, do_echo, 1, SCMD_EMOTE, 0, 0},
     {"edit", POS_DEAD, do_edit, 0, 0, 0, 0},

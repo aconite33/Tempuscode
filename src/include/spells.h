@@ -293,6 +293,25 @@ enum spell {
     SPELL_FLAME_OF_FAITH = 160,
     SPELL_ABLAZE = 161, // Only here to allow an ablaze affect
 
+    /************************** Warlock Spells ***************/
+    SPELL_HEX = 162,
+    SPELL_CORRUPTION = 163,
+    SPELL_RAY_OF_ENFEEBLEMENT = 164,
+    SPELL_SHADOW_BOLT = 165,
+    SPELL_BANE = 166,
+    SPELL_DRAIN_LIFE = 167,
+    SPELL_BESTOW_CURSE = 168,
+    SPELL_VAMPIRIC_TOUCH = 169,
+    SPELL_HELLISH_REBUKE = 170,
+    SPELL_DARKNESS = 171,
+    SPELL_FEAR_HEX = 172,
+    SPELL_AGONY = 173,
+    SPELL_SOUL_ROT = 174,
+    SPELL_CIRCLE_OF_DEATH = 175,
+    SPELL_SUMMON_DRETCH = 176,
+    SPELL_SUMMON_BARLGURA = 177,
+    SPELL_SUMMON_VROCK = 178,
+
     /************************** Psionic Triggers ***************/
     SPELL_POWER = 201,  /* Strength                */
     SPELL_INTELLECT = 202,
@@ -339,6 +358,14 @@ enum spell {
     SPELL_CALL_PREDATOR = 243,
     SPELL_SPIRIT_TRACK = 244,
     SPELL_PSYCHIC_FEEDBACK = 245,
+
+    /************************** Warlock Remort Spells ***************/
+    SPELL_SIPHON_SOUL = 276,
+    SPELL_ENERVATION = 277,
+    SPELL_FINGER_OF_DEATH = 278,
+    SPELL_SUMMON_GLABREZU = 279,
+    SPELL_NEGATIVE_ENERGY_FLOOD = 280,
+    SPELL_SUMMON_BALOR = 281,
 
     /**************************  Mercenary Devices ******************/
     SPELL_DECOY = 237,
@@ -674,6 +701,7 @@ enum spell {
     SKILL_GARROTE = 697,
     SKILL_SHIELD_MASTERY = 698,
     SKILL_UNCANNY_DODGE = 699,
+    SKILL_ELDRITCH_BLAST = 700,
 /*
  *  NON-PLAYER AND OBJECT SPELLS AND SKILLS
  *  The practice levels for the spells and skills below are _not_ recorded
@@ -989,6 +1017,17 @@ ASPELL(song_instant_audience);
 ASPELL(song_rhythm_of_alarm);
 ASPELL(song_wall_of_sound);
 ASPELL(song_hymn_of_peace);
+
+/* Warlock manual spells */
+ASPELL(spell_drain_life);
+ASPELL(spell_vampiric_touch);
+ASPELL(spell_siphon_soul);
+ASPELL(spell_summon_dretch);
+ASPELL(spell_summon_barlgura);
+ASPELL(spell_summon_vrock);
+ASPELL(spell_summon_glabrezu);
+ASPELL(spell_summon_balor);
+int warlock_align_scale(struct creature *ch, int dam);
 
 /* basic magic calling functions */
 

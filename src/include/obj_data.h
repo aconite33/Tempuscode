@@ -199,7 +199,7 @@ enum obj3_flag {
     ITEM3_REQ_MONK = (1 << 11),
     ITEM3_REQ_VAMPIRE = (1 << 12),
     ITEM3_REQ_MERCENARY = (1 << 13),
-    ITEM3_REQ_SPARE1 = (1 << 14),
+    ITEM3_REQ_WARLOCK = (1 << 14),
     ITEM3_REQ_SPARE2 = (1 << 15),
     ITEM3_REQ_SPARE3 = (1 << 16),
     ITEM3_LATTICE_HARDENED = (1 << 17),

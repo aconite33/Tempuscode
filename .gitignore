@@ -21,3 +21,4 @@ pause
 syslog
 *.o
 *~
+/warlock_hedit.txt

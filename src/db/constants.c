@@ -3290,8 +3290,8 @@ const struct weap_spec_info weap_spec_char_class[NUM_CLASSES] = {
         1.5, 6
     },                          // merc
     {
-        1.5, 6
-    },                          // spare1
+        3.5, 3
+    },                          // warlock
     {
         1.5, 6
     },                          // spare2

@@ -87,11 +87,11 @@ extern struct room_data *world;
 /* #define PRAC_TYPE                3  should it say 'spell' or 'skill'?        */
 
 const int prac_params[4][NUM_CLASSES] = {
-    /* MG  CL  TH  WR  BR  PS  PH  CY  KN  RN  BD  MN  VP  MR  S1  S2  S3 */
-    {75, 75, 70, 70, 65, 75, 75, 80, 75, 75, 80, 75, 75, 70, 70, 70, 70},
+    /* MG  CL  TH  WR  BR  PS  PH  CY  KN  RN  BD  MN  VP  MR  WK  S2  S3 */
+    {75, 75, 70, 70, 65, 75, 75, 80, 75, 75, 80, 75, 75, 70, 75, 70, 70},
     {25, 20, 20, 20, 20, 25, 20, 30, 20, 25, 30, 20, 15, 25, 25, 25, 25},
-    {15, 15, 10, 15, 10, 15, 15, 15, 15, 15, 15, 10, 10, 10, 10, 10, 10},
-    {SPL, SPL, SKL, SKL, SKL, TRG, ALT, PRG, SPL, SPL, SNG, ZEN, SPL, SKL, SKL,
+    {15, 15, 10, 15, 10, 15, 15, 15, 15, 15, 15, 10, 10, 10, 15, 10, 10},
+    {SPL, SPL, SKL, SKL, SKL, TRG, ALT, PRG, SPL, SPL, SNG, ZEN, SPL, SKL, SPL,
      SKL, SKL}
 
 };
@@ -100,16 +100,16 @@ const int prac_params[4][NUM_CLASSES] = {
 // 1 - class/race combination allowed only for secondary class
 // 2 - class/race combination allowed for primary class
 const char race_restr[NUM_PC_RACES][NUM_CLASSES + 1] = {
-    //                MG CL TH WR BR PS PH CY KN RN BD MN VP MR S1 S2 S3
-    {RACE_HUMAN,       2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 0, 0, 0},
-    {RACE_ELF,         2, 2, 2, 0, 0, 2, 2, 2, 2, 2, 2, 2, 0, 2, 0, 0, 0},
+    //                MG CL TH WR BR PS PH CY KN RN BD MN VP MR WK S2 S3
+    {RACE_HUMAN,       2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 0, 0},
+    {RACE_ELF,         2, 2, 2, 0, 0, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 0, 0},
     {RACE_DWARF,       0, 2, 2, 0, 2, 1, 1, 1, 2, 0, 0, 0, 0, 1, 0, 0, 0},
-    {RACE_HALF_ORC,    0, 0, 2, 0, 2, 0, 2, 2, 0, 2, 1, 0, 0, 2, 0, 0, 0},
-    {RACE_HALFLING,    2, 2, 2, 0, 2, 1, 1, 1, 2, 2, 2, 2, 0, 1, 0, 0, 0},
-    {RACE_TABAXI,      2, 2, 2, 0, 2, 2, 2, 2, 0, 2, 0, 2, 0, 2, 0, 0, 0},
-    {RACE_DROW,        2, 2, 2, 0, 0, 1, 1, 1, 2, 2, 2, 1, 0, 1, 0, 0, 0},
+    {RACE_HALF_ORC,    0, 0, 2, 0, 2, 0, 2, 2, 0, 2, 1, 0, 0, 2, 2, 0, 0},
+    {RACE_HALFLING,    2, 2, 2, 0, 2, 1, 1, 1, 2, 2, 2, 2, 0, 1, 2, 0, 0},
+    {RACE_TABAXI,      2, 2, 2, 0, 2, 2, 2, 2, 0, 2, 0, 2, 0, 2, 2, 0, 0},
+    {RACE_DROW,        2, 2, 2, 0, 0, 1, 1, 1, 2, 2, 2, 1, 0, 1, 2, 0, 0},
     {RACE_MINOTAUR,    2, 2, 0, 0, 2, 0, 1, 1, 0, 2, 0, 0, 0, 1, 0, 0, 0},
-    {RACE_ORC,         0, 0, 1, 0, 2, 0, 1, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0},
+    {RACE_ORC,         0, 0, 1, 0, 2, 0, 1, 2, 0, 0, 0, 2, 0, 2, 2, 0, 0},
 };
 
 /* THAC0 for char_classes and levels.  (To Hit Armor Class 0) */
@@ -129,7 +129,7 @@ const float thaco_factor[NUM_CLASSES] = {
     0.40,                       /* monk    */
     0.40,                       /* vampire */
     0.35,                       /* merc    */
-    0.30,                       /* spare1  */
+    0.17,                       /* warlock */
     0.30,                       /* spare2  */
     0.30                        /* spare3  */
 };
@@ -187,7 +187,7 @@ const char *char_class_abbrevs[] = {
     "Monk",
     "Vamp",
     "Merc",
-    "Spa1",
+    "Warl",
     "Spa2",                     /* 15 */
     "Spa3",
     "ERR", "ERR", "ERR", "ERR", "ERR", "ERR", "ERR", "ERR", "ERR",  /*25 */
@@ -288,7 +288,7 @@ const char *class_names[] = {
     "Monk",
     "Vampire",
     "Mercenary",
-    "Spare1",
+    "Warlock",
     "Spare2",                   /* 15 */
     "Spare3",
     "ILL", "ILL", "ILL", "ILL", "ILL", "ILL", "ILL", "ILL", "ILL",  /* 25 */
@@ -414,6 +414,8 @@ get_char_class_color_code(struct creature *ch, struct creature *tch,
         return CCGRN(ch, C_NRM);
     case CLASS_MERCENARY:
         return CCYEL(ch, C_NRM);
+    case CLASS_WARLOCK:
+        return CCRED_BLD(ch, C_NRM);
     default:
         return CCNRM(ch, C_NRM);
     }
@@ -454,6 +456,8 @@ get_char_class_color(struct creature *tch, int char_class)
         return "&g";
     case CLASS_MERCENARY:
         return "&y";
+    case CLASS_WARLOCK:
+        return "&R";
     default:
         return "&n";
     }
@@ -494,6 +498,8 @@ parse_player_class(char *arg)
         return CLASS_MERCENARY;
     } else if (is_abbrev(arg, "bard")) {
         return CLASS_BARD;
+    } else if (is_abbrev(arg, "warlock")) {
+        return CLASS_WARLOCK;
     }
 
     return CLASS_UNDEFINED;
@@ -752,6 +758,14 @@ roll_real_abils(struct creature *ch)
         ch->real_abils.wis = table[4];
         ch->real_abils.intel = table[5];
         break;
+    case CLASS_WARLOCK:
+        ch->real_abils.intel = table[0];
+        ch->real_abils.cha = table[1];
+        ch->real_abils.con = table[2];
+        ch->real_abils.wis = table[3];
+        ch->real_abils.dex = table[4];
+        ch->real_abils.str = table[5];
+        break;
     default:
         ch->real_abils.dex = table[0];
         ch->real_abils.con = table[1];
@@ -829,6 +843,10 @@ roll_real_abils(struct creature *ch)
         case CLASS_MERCENARY:
             ch->real_abils.str += 1;
             ch->real_abils.dex += 1;
+            break;
+        case CLASS_WARLOCK:
+            ch->real_abils.intel += 1;
+            ch->real_abils.cha += 1;
             break;
         default:
             break;
@@ -935,6 +953,12 @@ do_start(struct creature *ch, int mode)
     case CLASS_BARD:
         SET_SKILL(ch, SKILL_PUNCH, 25);
         SET_SKILL(ch, SKILL_ARCHERY, 25);
+        break;
+    case CLASS_WARLOCK:
+        SET_SKILL(ch, SKILL_PUNCH, 10);
+        SET_SKILL(ch, SKILL_ELDRITCH_BLAST, 25);
+        SET_SKILL(ch, SPELL_MAGIC_MISSILE, 10);
+        SET_SKILL(ch, SPELL_CHILL_TOUCH, 10);
         break;
     }
 
@@ -1148,6 +1172,12 @@ advance_level(struct creature *ch, int8_t keep_internal)
             add_mana[i] += number(1, 2) + (GET_LEVEL(ch) / 22);
             add_move[i] += number(6, 9);
             break;
+        case CLASS_WARLOCK:
+            add_hp[i] /= 5;
+            add_hp[i] += number(3, 10);
+            add_mana[i] += number(1, 10) + (GET_LEVEL(ch) / 3);
+            add_move[i] += number(1, 3);
+            break;
         default:
             add_hp[i] /= 2;
             add_hp[i] += number(5, 16);
@@ -1274,7 +1304,7 @@ invalid_char_class(struct creature *ch, struct obj_data *obj)
         || (IS_OBJ_STAT3(obj, ITEM3_REQ_MONK) && IS_MONK(ch))
         || (IS_OBJ_STAT3(obj, ITEM3_REQ_VAMPIRE) && IS_VAMPIRE(ch))
         || (IS_OBJ_STAT3(obj, ITEM3_REQ_MERCENARY) && IS_MERC(ch))
-        || (IS_OBJ_STAT3(obj, ITEM3_REQ_SPARE1) && IS_SPARE1(ch))
+        || (IS_OBJ_STAT3(obj, ITEM3_REQ_WARLOCK) && IS_WARLOCK(ch))
         || (IS_OBJ_STAT3(obj, ITEM3_REQ_SPARE2) && IS_SPARE2(ch))
         || (IS_OBJ_STAT3(obj, ITEM3_REQ_SPARE3) && IS_SPARE3(ch))) {
         return false;
@@ -1295,7 +1325,7 @@ invalid_char_class(struct creature *ch, struct obj_data *obj)
                      | ITEM3_REQ_MONK
                      | ITEM3_REQ_VAMPIRE
                      | ITEM3_REQ_MERCENARY
-                     | ITEM3_REQ_SPARE1 | ITEM3_REQ_SPARE2 | ITEM3_REQ_SPARE3)) {
+                     | ITEM3_REQ_WARLOCK | ITEM3_REQ_SPARE2 | ITEM3_REQ_SPARE3)) {
         return true;
     }
 

@@ -3161,4 +3161,217 @@ $N lies immobile on the ground, suffering...
 #
 Suffer god victim..
 Suffer god room..
+
+***************************************************************************
+*                           Warlock Abilities                             *
+***************************************************************************
+
+* Eldritch Blast
+M
+ 700
+Your eldritch beam tears $N apart in a flash of violet fire!
+$n's eldritch beam tears you apart in a flash of violet fire!
+$n's eldritch beam tears $N apart in a flash of violet fire!
+Your beam of eldritch fire sputters and dissipates around $N.
+$n's beam of eldritch fire sputters and dissipates around you.
+$n's beam of eldritch fire sputters and dissipates around $N.
+You sear $N with a crackling beam of eldritch energy!
+$n sears you with a crackling beam of eldritch energy!
+$n sears $N with a crackling beam of eldritch energy!
+The Abyss itself laughs at you as $N turns your beam aside.
+Your pact hums with approval as $n's beam splinters against your will.
+$n's pathetic beam splinters against $N, no match for a true patron.
+
+* Shadow Bolt
+M
+ 165
+Your shadow bolt engulfs $N in a cloud of cold darkness. $E is slain!
+A roiling shadow bolt from $n engulfs you, snuffing out your life.
+$n's shadow bolt engulfs $N in rolling darkness. $E falls dead.
+Your shadow bolt dissipates before it reaches $N.
+$n hurls a shadow bolt at you, but it fades away before landing.
+$n's shadow bolt fades away before reaching $N.
+You hurl a bolt of writhing shadow at $N!
+A bolt of writhing shadow from $n slams into you!
+$n hurls a bolt of writhing shadow into $N!
+#
+#
+#
+
+* Corruption
+M
+ 163
+The corruption finally rots $N from within. $E falls dead.
+The corruption in your veins overcomes you. You slump dead.
+$N falls lifeless as the corruption in $S flesh takes its toll.
+#
+#
+#
+Dark corruption festers deeper into $N's flesh.
+The corruption festers deeper within you, gnawing at your vitality.
+Corruption festers deeper within $N, gnawing at $S vitality.
+#
+#
+#
+
+* Drain Life
+M
+ 167
+Your pact drinks the last of $N's lifeblood. $E crumples and dies.
+$n drains the last of your lifeblood. You crumple and die.
+$n drains the last of $N's lifeblood. $E crumples and dies.
+Your pact reaches for $N's life force but finds nothing to grasp.
+$n reaches for your life force but fails to latch on.
+$n reaches for $N's life force but fails to latch on.
+Dark tendrils drag $N's vitality into your own flesh!
+Dark tendrils from $n drag your vitality into $s flesh!
+Dark tendrils from $n drag $N's vitality into $s own flesh!
+#
+#
+#
+
+* Vampiric Touch
+M
+ 169
+Your fingers close on $N and drink $S soul dry. $E is slain!
+$n's fingers close on you and drink your soul dry. You die!
+$n's fingers close on $N, draining $S soul. $E dies!
+Your hand passes through $N, grasping at nothing.
+$n's hand passes through you, grasping at nothing.
+$n's hand passes through $N, grasping at nothing.
+You seize $N and drink deep of $S essence!
+$n seizes you and drinks deep of your essence!
+$n seizes $N and drinks deep of $S essence!
+#
+#
+#
+
+* Hellish Rebuke
+M
+ 170
+Flames of the Abyss consume $N for the offense. $E is slain!
+Flames of the Abyss consume you for the offense. You die!
+Flames of the Abyss consume $N for offending $n. $E dies!
+The hellish flames gutter out before they reach $N.
+The hellish flames gutter out before reaching you.
+The hellish flames gutter out before reaching $N.
+Flames of the Abyss erupt around $N at your rebuke!
+Flames of the Abyss erupt around you at $n's rebuke!
+Flames of the Abyss erupt around $N at $n's rebuke!
+#
+#
+#
+
+* Agony
+M
+ 173
+The burning symbol of agony consumes $N. $E falls dead.
+The burning symbol of agony consumes you. You fall dead.
+$N screams as the symbol of agony consumes $M.
+#
+#
+#
+The symbol of agony burns deeper into $N's flesh.
+The symbol of agony burns deeper into your flesh.
+The symbol of agony burns deeper into $N's flesh.
+#
+#
+#
+
+* Soul Rot
+M
+ 174
+The rot in $N's soul overwhelms $M. $E collapses and dies.
+The rot in your soul overwhelms you. You collapse and die.
+$N collapses as the soul rot finally consumes $M.
+#
+#
+#
+The rot spreads deeper through $N's soul.
+The rot spreads deeper through your soul.
+The rot spreads deeper through $N's soul.
+#
+#
+#
+
+* Circle of Death
+M
+ 175
+A sphere of death engulfs $N. $E is slain where $E stands!
+A sphere of death engulfs you. You die where you stand!
+A sphere of death engulfs $N. $E is slain where $E stands!
+$N steps clear of your sphere of death in the nick of time.
+You step clear of $n's sphere of death in the nick of time.
+$N steps clear of $n's sphere of death in the nick of time.
+A sphere of death rolls outward, searing $N!
+A sphere of death rolls outward, searing you!
+A sphere of death rolls outward, searing $N!
+#
+#
+#
+
+* Siphon Soul
+M
+ 276
+Your pact drinks $N's soul empty. $E collapses, dead.
+$n siphons your soul empty. You collapse and die.
+$n siphons $N's soul empty. $E collapses, dead.
+Your siphon passes over $N without purchase.
+$n's siphon passes over you without purchase.
+$n's siphon passes over $N without purchase.
+You siphon the raw essence of $N's soul!
+$n siphons the raw essence of your soul!
+$n siphons the raw essence of $N's soul!
+#
+#
+#
+
+* Enervation
+M
+ 277
+The enervation drains $N dry of life. $E falls dead.
+The enervation drains you dry of life. You fall dead.
+$N falls dead as the enervation drains $M of life.
+#
+#
+#
+The enervation leaches more life-force from $N.
+The enervation leaches more life-force from you.
+The enervation leaches more life-force from $N.
+#
+#
+#
+
+* Finger of Death
+M
+ 278
+Your pointing finger extinguishes $N's life in an instant!
+$n's pointing finger extinguishes your life in an instant!
+$n's pointing finger extinguishes $N's life in an instant!
+Your pointing finger trembles. $N shrugs off the pact-word.
+$n's pointing finger trembles. You shrug off the pact-word.
+$n's pointing finger trembles. $N shrugs off the pact-word.
+You point at $N and speak a word of death!
+$n points at you and speaks a word of death!
+$n points at $N and speaks a word of death!
+The Abyss bends its will away from $N.
+The Abyss bends its will away from you at $n's pointing.
+The Abyss bends its will away from $N at $n's pointing.
+
+* Negative Energy Flood
+M
+ 280
+A flood of negative energy drowns $N in soul-death. $E dies!
+A flood of negative energy drowns you in soul-death. You die!
+A flood of negative energy drowns $N. $E dies!
+$N weathers your flood of negative energy.
+You weather $n's flood of negative energy.
+$N weathers $n's flood of negative energy.
+A flood of negative energy bursts from your pact, washing over $N!
+A flood of negative energy bursts from $n, washing over you!
+A flood of negative energy bursts from $n, washing over $N!
+#
+#
+#
+
 $

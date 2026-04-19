@@ -479,6 +479,64 @@ burn_update_creature(struct creature *ch)
             return;
         }
     }
+    // Warlock Corruption DoT
+    if ((af = affected_by_spell(ch, SPELL_CORRUPTION))) {
+        int tick_dam;
+        damager = get_char_in_world_by_idnum(af->owner);
+        if (!damager) {
+            damager = ch;
+        }
+        tick_dam = mag_savingthrow(ch, af->level, SAVING_SPELL)
+                   ? dice(1, 4) : dice(2, af->level / 3 + 2);
+        tick_dam = warlock_align_scale(damager, tick_dam);
+        damage(damager, ch, NULL, tick_dam, SPELL_CORRUPTION, -1);
+        if (is_dead(ch)) {
+            return;
+        }
+    }
+    // Warlock Agony DoT (stacks damage from the symbol of pain)
+    if ((af = affected_by_spell(ch, SPELL_AGONY))) {
+        int tick_dam;
+        damager = get_char_in_world_by_idnum(af->owner);
+        if (!damager) {
+            damager = ch;
+        }
+        tick_dam = mag_savingthrow(ch, af->level, SAVING_SPELL)
+                   ? dice(1, 6) : dice(3, af->level / 2 + 2);
+        tick_dam = warlock_align_scale(damager, tick_dam);
+        damage(damager, ch, NULL, tick_dam, SPELL_AGONY, -1);
+        if (is_dead(ch)) {
+            return;
+        }
+    }
+    // Warlock Soul Rot DoT (hardest-hitting)
+    if ((af = affected_by_spell(ch, SPELL_SOUL_ROT))) {
+        int tick_dam;
+        damager = get_char_in_world_by_idnum(af->owner);
+        if (!damager) {
+            damager = ch;
+        }
+        tick_dam = mag_savingthrow(ch, af->level, SAVING_SPELL)
+                   ? dice(2, 6) : dice(4, af->level / 2 + 2);
+        tick_dam = warlock_align_scale(damager, tick_dam);
+        damage(damager, ch, NULL, tick_dam, SPELL_SOUL_ROT, -1);
+        if (is_dead(ch)) {
+            return;
+        }
+    }
+    // Warlock Enervation - drains HP each tick
+    if ((af = affected_by_spell(ch, SPELL_ENERVATION))) {
+        int tick_dam;
+        damager = get_char_in_world_by_idnum(af->owner);
+        if (!damager) {
+            damager = ch;
+        }
+        tick_dam = warlock_align_scale(damager, dice(2, af->level / 3 + 2));
+        damage(damager, ch, NULL, tick_dam, SPELL_ENERVATION, -1);
+        if (is_dead(ch)) {
+            return;
+        }
+    }
     // character has entropy field
     if ((af = affected_by_spell(ch, SPELL_ENTROPY_FIELD))
         && !random_fractional_10()

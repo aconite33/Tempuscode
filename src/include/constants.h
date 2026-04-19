@@ -57,7 +57,7 @@ enum {
     MAX_MESSAGES =              1000,
     MAX_CHAR_DESC =             1023,
     MAX_TONGUES =               50,
-    MAX_SKILLS =                700,
+    MAX_SKILLS =                701,
     MAX_AFFECT =                96,
     MAX_OBJ_AFFECT =            16,
 
