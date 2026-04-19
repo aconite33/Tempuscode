@@ -1,7 +1,7 @@
 //
 // File: act.warlock.c                  -- Part of TempusMUD
 //
-// Signature at-will ability and helpers for the Warlock class.
+// Copyright 1998 by John Watson, all rights reserved.
 //
 
 #include <stdio.h>
@@ -11,6 +11,7 @@
 #include <ctype.h>
 #include <time.h>
 #include <glib.h>
+#include <libxml/parser.h>
 
 #include "interpreter.h"
 #include "structs.h"
@@ -35,9 +36,12 @@
 #include "spells.h"
 #include "materials.h"
 #include "fight.h"
-#include <libxml/parser.h>
 #include "obj_data.h"
 #include "strutil.h"
+
+//
+// eldritch blast - signature at-will pact ability
+//
 
 ACMD(do_eldritch_blast)
 {
@@ -60,7 +64,7 @@ ACMD(do_eldritch_blast)
     }
 
     if (!vict) {
-        send_to_char(ch, "Blast whom?\r\n");
+        send_to_char(ch, "Blast who?\r\n");
         return;
     }
     if (vict == ch) {

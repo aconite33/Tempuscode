@@ -4084,8 +4084,6 @@ But blocks true love and harbors sin.</lyrics>
   <spell id="827" name="egun lightning">
     <flag value="weapon"/>
   </spell>
-
-  <!-- ============== Warlock Class ================ -->
   <skill id="700" name="eldritch blast">
     <granted class="warlock" level="1"/>
   </skill>

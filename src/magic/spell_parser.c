@@ -710,8 +710,6 @@ call_magic(struct creature *caster, struct creature *cvict,
         case SONG_HYMN_OF_PEACE:
             MANUAL_SPELL(song_hymn_of_peace);
             break;
-
-        /* ============ Warlock manual spells ============ */
         case SPELL_DRAIN_LIFE:
             MANUAL_SPELL(spell_drain_life);
             break;
@@ -736,7 +734,6 @@ call_magic(struct creature *caster, struct creature *cvict,
         case SPELL_SUMMON_BALOR:
             MANUAL_SPELL(spell_summon_balor);
             break;
-        /* ================================================ */
 
         }
     }

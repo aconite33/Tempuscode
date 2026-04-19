@@ -877,11 +877,11 @@ mag_damage(int level, struct creature *ch, struct creature *victim,
         dam = dice(level / 2, 4);
         break;
 
-    /* ============== Warlock direct-damage spells ============== */
     case SPELL_SHADOW_BOLT:
         dam = dice(level, 6) + level;
         break;
     case SPELL_HELLISH_REBUKE:
+        audible = true;
         dam = dice(level, 5) + level * 2;
         if (!CHAR_WITHSTANDS_FIRE(victim)) {
             ignite_creature(victim, ch);
@@ -898,9 +898,9 @@ mag_damage(int level, struct creature *ch, struct creature *victim,
         }
         break;
     case SPELL_NEGATIVE_ENERGY_FLOOD:
+        audible = true;
         dam = dice(level, 8) + level * 3;
         break;
-    /* ============================================================ */
 
     }                           /* switch(spellnum) */
 
@@ -944,10 +944,7 @@ mag_damage(int level, struct creature *ch, struct creature *victim,
         }
     }
 
-    /*
-     * Warlock pact drift: the Abyss does not lend full power to wavering
-     * souls. Neutral Warlocks cast at 50% damage, good Warlocks at 25%.
-     */
+    // warlock pact drift - neutral casters do 50% damage, good casters 25%
     if (IS_WARLOCK(ch) && !IS_EVIL(ch)) {
         if (IS_GOOD(ch)) {
             dam = dam / 4;
@@ -2784,7 +2781,6 @@ mag_affects(int level,
         to_room = "Mirror images of $n begin moving around $m.";
         break;
 
-    /* ============== Warlock spells ============== */
     case SPELL_HEX:
         aff[0].location = APPLY_HITROLL;
         aff[0].duration = 1 + (level / 3);
@@ -2861,7 +2857,7 @@ mag_affects(int level,
         break;
     case SPELL_AGONY:
         if (HAS_SYMBOL(victim)) {
-            send_to_char(ch, "Your agony fails. Another symbol already burns.\r\n");
+            send_to_char(ch, "Another symbol of pain already burns upon this creature.\r\n");
             return;
         }
         aff[0].location = APPLY_DEX;
@@ -2892,7 +2888,6 @@ mag_affects(int level,
         to_vict = "Your life-force leaks away under the enervation!";
         to_room = "$n's life-force leaks away under the enervation!";
         break;
-    /* =============================================== */
 
     default:
         errlog("unknown spell %d in mag_affects.", spellnum);

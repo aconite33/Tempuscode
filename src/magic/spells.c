@@ -3892,14 +3892,7 @@ ASPELL(spell_call_predator)
     }
 }
 
-/* ============================================================
- *  WARLOCK MANUAL SPELLS
- * ============================================================ */
-
-/*
- * Warlock pact drift: the Abyss does not lend full power to wavering
- * souls. Neutral Warlocks do 50% damage, good Warlocks do 25%.
- */
+// warlock pact drift - neutral casters do 50% damage, good casters 25%
 int
 warlock_align_scale(struct creature *ch, int dam)
 {
@@ -3979,9 +3972,8 @@ ASPELL(spell_siphon_soul)
     gain_skill_prof(ch, SPELL_SIPHON_SOUL);
 }
 
-/* Pact minion summon helper.  Placeholder vnums reuse the existing
- * legion_vnums[] devil pool until dedicated Dretch / Barlgura / Vrock /
- * Glabrezu / Balor mobs are built in sample_lib/world/. */
+// pact minion summon helper - placeholder vnums reuse legion_vnums[] until
+// dedicated dretch/barlgura/vrock/glabrezu/balor mobs are built
 static void
 perform_summon_pact(struct creature *ch, int level, int spellnum,
                     int vnum_idx_min, int vnum_idx_max,
