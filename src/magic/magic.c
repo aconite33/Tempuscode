@@ -894,7 +894,8 @@ mag_damage(int level, struct creature *ch, struct creature *victim,
         dam = dice(level, 8) + level * 2;
         if (GET_HIT(victim) - dam < (int)GET_LEVEL(ch) &&
             !mag_savingthrow(victim, level, savetype)) {
-            dam = GET_HIT(victim) + 10;  /* instakill */
+            // instakill if target would be left under the caster's level
+            dam = GET_HIT(victim) + 10;
         }
         break;
     case SPELL_NEGATIVE_ENERGY_FLOOD:
@@ -1036,7 +1037,7 @@ mag_damage(int level, struct creature *ch, struct creature *victim,
                 true, victim, NULL, NULL, TO_ROOM);
         }
     } else if (spellnum == SPELL_NEGATIVE_ENERGY_FLOOD) {
-        /* Apply Corruption DoT to survivors of the flood. */
+        // seed Corruption on survivors of the flood
         if (!affected_by_spell(victim, SPELL_CORRUPTION)) {
             mag_affects(level, ch, victim, NULL, SPELL_CORRUPTION, savetype);
         }

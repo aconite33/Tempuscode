@@ -83,7 +83,7 @@ ACMD(do_eldritch_blast)
         return;
     }
 
-    /* Effective level scales with remort generation. */
+    // effective level scales with remort generation
     lvl = GET_LEVEL(ch) + GET_REMORT_GEN(ch) * 2;
     if (lvl >= 45) {
         beams = 4;
@@ -113,7 +113,8 @@ ACMD(do_eldritch_blast)
             > number(1, 101) + GET_DEX(vict)) {
             dam = dice(1 + (lvl > 4), 8) + lvl / 3;
         } else {
-            dam = 0;  /* beam fizzles */
+            // beam fizzles
+            dam = 0;
         }
         dam = warlock_align_scale(ch, dam);
         damage(ch, vict, NULL, dam, SKILL_ELDRITCH_BLAST, -1);

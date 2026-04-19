@@ -1293,7 +1293,7 @@ build_prompt(struct descriptor_data *d)
         } else if (IS_MONK(d->creature)) {
             return "The monastic ideology requires that you remain neutral in alignment.\r\nTherefore you begin your life with a perfect neutrality.\r\n\r\nPress return to continue.\r\n";
         } else if (IS_WARLOCK(d->creature)) {
-            return "A Warlock's pact is bound in malice.  You begin your life as evil.\r\n\r\nPress return to continue.\r\n";
+            return "A Warlock's pact is bound in malice.\r\nTherefore you begin your life as evil.\r\n\r\nPress return to continue.\r\n";
         } else if (IS_KNIGHT(d->creature) || IS_CLERIC(d->creature)) {
             return "Do you wish to be good or evil? ";
         } else {

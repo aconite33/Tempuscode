@@ -3405,7 +3405,7 @@ ASPELL(spell_dispel_magic)
                 if (SPELL_IS_MAGIC(aff->type) || SPELL_IS_DIVINE(aff->type) ||
                     SPELL_IS_BARD(aff->type)) {
                     if (aff->level < number(level / 2, level * 2)) {
-                        /* Soul Rot bites back on dispel. */
+                        // soul rot bites back when dispelled
                         if (aff->type == SPELL_SOUL_ROT) {
                             act("$n's pact lashes out at you as the soul rot unravels!",
                                 false, victim, NULL, ch, TO_VICT);
@@ -3915,7 +3915,7 @@ ASPELL(spell_drain_life)
     dam = dice(level / 2, 6) + level;
     dam = warlock_align_scale(ch, dam);
     if (damage(ch, victim, NULL, dam, SPELL_DRAIN_LIFE, -1)) {
-        return;  /* victim died */
+        return;
     }
     GET_HIT(ch) = MIN(GET_MAX_HIT(ch), GET_HIT(ch) + dam / 2);
     act("You feel reinvigorated as $N's life-force drains into you.",
@@ -3933,7 +3933,7 @@ ASPELL(spell_vampiric_touch)
     dam = dice(level, 8);
     dam = warlock_align_scale(ch, dam);
     if (damage(ch, victim, NULL, dam, SPELL_VAMPIRIC_TOUCH, -1)) {
-        return;  /* victim died */
+        return;
     }
     GET_HIT(ch) = MIN(GET_MAX_HIT(ch), GET_HIT(ch) + dam);
     act("You drain $N's very essence into your own flesh!",
@@ -3952,7 +3952,7 @@ ASPELL(spell_siphon_soul)
     dam = dice(level, 7) + level;
     dam = warlock_align_scale(ch, dam);
     if (damage(ch, victim, NULL, dam, SPELL_SIPHON_SOUL, -1)) {
-        return;  /* victim died */
+        return;
     }
     GET_HIT(ch) = MIN(GET_MAX_HIT(ch), GET_HIT(ch) + dam / 2);
     GET_MANA(ch) = MIN(GET_MAX_MANA(ch), GET_MANA(ch) + dam / 3);
@@ -3996,7 +3996,7 @@ perform_summon_pact(struct creature *ch, int level, int spellnum,
     idx = MIN(MAX(idx, 0), 4);
     if (!(demon = read_mobile(legion_vnums[idx]))) {
         errlog("unable to load pact minion vnum=%d.", legion_vnums[idx]);
-        send_to_char(ch, "Your pact falters. The Abyss does not answer.\r\n");
+        send_to_char(ch, "Your pact falters as the Abyss refuses to answer.\r\n");
         return;
     }
 
