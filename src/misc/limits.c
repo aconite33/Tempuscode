@@ -145,7 +145,7 @@ mana_gain(struct creature *ch)
     }
 
     if (IS_MAGE(ch) || IS_CLERIC(ch) || IS_PSYCHIC(ch) || IS_PHYSIC(ch) ||
-        IS_BARD(ch)) {
+        IS_BARD(ch) || IS_WARLOCK(ch)) {
         gain *= 2;
     }
 

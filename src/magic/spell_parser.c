@@ -1598,7 +1598,7 @@ ACMD(do_cast)
     }
 
     if (!IS_MAGE(ch) && !IS_CLERIC(ch) && !IS_KNIGHT(ch) && !IS_RANGER(ch)
-        && !IS_VAMPIRE(ch) && GET_CLASS(ch) < NUM_CLASSES
+        && !IS_VAMPIRE(ch) && !IS_WARLOCK(ch) && GET_CLASS(ch) < NUM_CLASSES
         && (GET_LEVEL(ch) < LVL_GRGOD)) {
         send_to_char(ch, "You are not learned in the ways of magic.\r\n");
         return;
