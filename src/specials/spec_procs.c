@@ -204,8 +204,8 @@ class_can_do_abilities(int con, int rcon, int bits)
     case SKILL_BIT:
         return true;
     case SPELL_BIT:
-        return (con == CLASS_MAGE || con == CLASS_CLERIC || con == CLASS_KNIGHT || con == CLASS_RANGER
-                || rcon == CLASS_MAGE || rcon == CLASS_CLERIC || rcon == CLASS_KNIGHT || rcon == CLASS_RANGER);
+        return (con == CLASS_MAGE || con == CLASS_CLERIC || con == CLASS_KNIGHT || con == CLASS_RANGER || con == CLASS_WARLOCK
+                || rcon == CLASS_MAGE || rcon == CLASS_CLERIC || rcon == CLASS_KNIGHT || rcon == CLASS_RANGER || rcon == CLASS_WARLOCK);
     case TRIG_BIT:
         return (con == CLASS_PSIONIC || rcon == CLASS_PSIONIC);
     case ZEN_BIT:
